@@ -1,90 +1,155 @@
-import java.util.*;
-public class Main
-{
+import java.util.Scanner;
 
-	private static ArrayList<Integer> input = new ArrayList<Integer>(); //arraylist of input
-	private static int counter = 0;
+public class Bubbles_And_Bucket {
+    
+    static Scanner scanner=new Scanner(System.in);
+    
+    static int testCases,n;
+    
+    static void binarySearch(int a[],int start,int mid,int end){
+        
+      int n1=mid-start+1;  
+      int n2=end-mid;  
+      
+      int []left=new int[n1];
+      int []right=new int[n2];
+      
+      for(int i=0;i<n1;i++){
+          
+          left[i]=a[start+i];
+          
+      }
+      
+      for(int j=0;j<n2;j++){
+          
+          try{
+          
+          right[j]=a[mid+j+1];
+          
+          }catch(Exception e ){
+              
+              
+          }
+          
+      }
+      
+      int i=0,j=0,k=start;
+      
+      while( i<n1 && j<n2 ){
+          
+          if( left[i]<=right[j] ){
+              
+              a[k]=left[i];
+              
+              i++;
+              
+          }else{
+              
+              a[k]=right[j];
+              
+          //    if(!(i<left.length && j<right.length)){
+             
+                  count+=left.length-i;
+              
+            //  }
+              
+              j++;
+              
+          }
+       //   System.out.println("i blocked");   
+          k++;
+          
+      }
+    
+    //    System.out.println("i: "+i+" k: "+k);
+      
+      while(i<n1){
 
-	private static ArrayList<Integer> merge(ArrayList<Integer> temp1, ArrayList<Integer> temp2)
-	{
-		int i = 0;
-		int j = 0;
-		int size1 = temp1.size();
-		int size2 = temp2.size();
-		ArrayList<Integer> temp = new ArrayList<Integer>();
-		//sorting two arraylist and adding into one arraylist with counter increament
-		while (i < size1 && j < size2)
-		{
-			if (temp1.get(i) < temp2.get(j))
-			{
-				temp.add(temp1.get(i));
-				i++;
-			}
-			else
-			{
-				temp.add(temp2.get(j));
-				counter += (int)(temp1.size()) - i;
-				j++;
-			}
-		}
+try{
+          
+          a[k]=left[i];
+          i++;
+          k++;
+    
+}catch(Exception e ){
+    
+  //  System.out.println("I blocked");
+    
+  i++;
+  
+}
+          
+      }
+      
+      while(j<n2){
+          
+          a[k]=right[j];
+          j++;
+          k++;
+          
+    //      count+=left.length-i;
+          
+      }
+      
+      //  System.out.println("a: "+Arrays.toString(a));
+      
+      // return 0;
+        
+    }
+    
+    static long count=0;
+    
+    static void findAnswer(int a[],int start,int end){
+        
+        if( start>=end ){
+            
+            return;
+            
+        }
+        
+        int mid=(start+end-1)/2;
+        
+        findAnswer(a,start,mid);
+        findAnswer(a,mid+1,end  );
+        binarySearch(a,start,mid,end);
+      
+    }
+    
+    static void solve(int a[],int n){
+        
+        count=0;
+        
+            findAnswer( a,0,n-1 );
 
-		while (i < size1)
-		{
-			temp.add(temp1.get(i));
-			i++;
-		}
-
-		while (j < size2)
-		{
-			temp.add(temp2.get(j));
-			j++;
-		}
-
-		return temp;
-	}
-
-	private static ArrayList<Integer> mergeSort(int left, int right)
-	{
-		ArrayList<Integer> temp = new ArrayList<Integer>();
-		int middle = (left + right) / 2;
-
-		if (left + 1 >= right)
-		{
-			temp.add(input.get(left));
-			return temp;
-		}
-		//breaking arraylist into equals part
-		ArrayList<Integer> temp1 = mergeSort(left, middle);
-		ArrayList<Integer> temp2 = mergeSort(middle, right);
-		//sorting arraylist
-		temp= new ArrayList<Integer>(merge(new ArrayList(temp1), new ArrayList(temp2)));
-	
-		return temp;
-	}
-
-	public static void main(String[] args)
-	{
-		int n;
-		int x=0;
-		Scanner obj=new Scanner(System.in);
-		while (obj.hasNextInt()) //till we get 0
-		{
-			n=obj.nextInt(); //size of arraylist
-			if (n==0)
-				break;
-			counter = 0;
-			input.clear();
-
-			for (int i = 0; i < (n); ++i)
-			{
-			
-				input.add(obj.nextInt());
-			
-			}
-			//merge sort is used with counter increament
-			mergeSort(0, n);
-	
-			if (counter % 2 != 0)
+    //        System.out.println(count);
+           
+    }
+    
+    public static void main(String[] args) {
+        
+      //  testCases=scanner.nextInt();
+        
+        while(true){
+            
+            n=scanner.nextInt();
+         
+            if(n==0){
+                
+                break;
+                
+            }
+            
+    int a[]=new int[n];      
+            
+    for(int j=0;j<n;j++){
+        
+        a[j]=scanner.nextInt();
+        
+    }
+    
+    solve(a,n);
+    
+    if (count % 2 != 0)
 			{
 				System.out.println("Marcelo");
 			}
@@ -92,7 +157,11 @@ public class Main
 			{
 				System.out.println("Carlos");
 			}
-		}
-
-	}
+    
+    count=0;
+    
+        }
+        
+    }
+    
 }
