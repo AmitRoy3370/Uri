@@ -1,41 +1,49 @@
 import java.util.*;
-import java.io.*;
 
-public class Main {
+public class Sort_Sort_And_Sort {
 	
 	static int m;
 	//this class is for comparing value after taking mod
 	static class Item implements Comparable<Item> 
 	{
-		int num;
+		int number;
 		
-		public Item(int num) 
+		public Item(int number) 
 		{
-			this.num = num;
+			this.number = number;
 		}
 
+        public int getNumber() {
+            return number;
+        }
+
+        public void setNumber(int number) {
+            this.number = number;
+        }
+
+                @Override
 		public int compareTo(Item i) 
 		{
 			//getting mod
-			int mod1 = (Math.abs(this.num) % m) * (this.num < 0 ? -1 : 1);
-			int mod2 = (Math.abs(i.num) % m) * (i.num < 0 ? -1 : 1);
+			int mod1 = (Math.abs(this.getNumber() ) % m) * (this.getNumber() < 0 ? -1 : 1);
+			int mod2 = (Math.abs(i.getNumber() ) % m) * (i.getNumber() < 0 ? -1 : 1);
 			//comparing mod and return value 
 			if (mod1 != mod2)
 				return mod1 - mod2;
 			
-			int mod21 = Math.abs(this.num) % 2;
-			int mod22 = Math.abs(i.num) % 2;
+			int mod21 = Math.abs(this.getNumber() ) % 2;
+			int mod22 = Math.abs(i.getNumber() ) % 2;
 			if (mod21 == 0 && mod22 == 1)
 				return 1;
 			if (mod21 == 1 && mod22 == 0)
 				return -1;
-			if (mod21 == 1 && mod22 == 1 && i.num <= this.num)
+			if (mod21 == 1 && mod22 == 1 && i.getNumber() <= this.getNumber() )
 				return -1;
-			if (mod21 == 1 && mod22 == 1 && i.num > this.num)
+			if (mod21 == 1 && mod22 == 1 && i.getNumber() > this.getNumber() )
 				return 1;
-			if (mod21 == 0 && mod22 == 0 && i.num <= this.num)
+			if (mod21 == 0 && mod22 == 0 && i.getNumber() <= this.getNumber() )
 				return 1;
-			if (mod21 == 0 && mod22 == 0 && i.num > this.num)
+			if (mod21 == 0 && mod22 == 0 && i.getNumber() > this.getNumber() )
 				return -1;
 			return 1;
 		}
@@ -50,7 +58,7 @@ public class Main {
 			int n=obj.nextInt();
 			m=obj.nextInt();
 			//adding n and m in string builder 
-			sb.append(n + " " + m + "\n");
+                        sb.append(n).append(" ").append(m).append("\n");
 			if (n == 0 && m == 0)
 				break;
 			Item[] items = new Item[n];
@@ -64,8 +72,30 @@ public class Main {
 			Arrays.sort(items);
 			//adding each num in string builder after new line 
 			for (int i = 0; i < n; ++i)
-				sb.append(items[i].num + "\n");
+				sb.append(items[i].getNumber()).append("\n");
 		}
 		System.out.print(sb);
 	}
 }
+
+/*15 3
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+3 3
+9
+12
+10
+0 0*/
