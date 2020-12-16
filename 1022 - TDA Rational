@@ -1,0 +1,106 @@
+import java.util.Scanner;
+
+public class TDA_Rational {
+    
+    static Scanner scanner=new Scanner(System.in);
+    
+    static char c1,c2,c3;
+    
+    static  int n, N1, N2, D1, D2, num, den, numS, denS, e;
+    
+    static int solve(int a,int b){
+        
+        int divisor = 0,divideInto,c;
+        
+        if( a==0 ){
+            
+            return 1;
+            
+        }
+        
+        if( b>a ){
+            
+            divideInto=b;
+            divisor=a;
+            
+        }else{
+            
+            divideInto=a;
+            divisor=b;
+            
+        }
+        
+        while( divideInto%divisor!=0 ){
+            
+            c=divideInto%divisor;
+            
+            divideInto=divisor;
+            divisor=c;
+            
+        }
+        
+        return divisor;
+        
+    }
+    
+    public static void main(String[] args) {
+        
+        n=scanner.nextInt();
+        
+        for(int i=0;i<n;i++){
+            
+            N1=scanner.nextInt();
+            c1=scanner.next().charAt(0);
+            D1=scanner.nextInt();
+            
+            c2=scanner.next().charAt(0);
+            
+            N2=scanner.nextInt();
+            c3=scanner.next().charAt(0);
+            D2=scanner.nextInt();
+            
+            switch (c2) {
+                case '+':
+                    num=(N1*D2)+(N2*D1);
+                    den=(D1*D2);
+                    break;
+                case '-':
+                    num=(N1*D2)-(N2*D1);
+                    den=D1*D2;
+                    break;
+                case '*':
+                    num=N1*N2;
+                    den=D1*D2;
+                    break;
+                default:
+                    num=N1*D2;
+                    den=N2*D1;
+                    break;
+            }
+            
+            int x=solve( num,den );
+            
+            numS=num/x;
+            denS=den/x;
+            
+            if(numS>0 && denS>0){
+                
+                System.out.println(num+"/"+den+" = "+numS+"/"+denS);
+                
+            }else{
+                
+                if(denS < 0)
+            {
+                denS = -denS;
+                numS = -numS;
+            }
+                
+                System.out.println(num+"/"+den+" = "+numS+"/"+denS);
+                
+            }
+            
+        }
+        
+    }
+    
+}
