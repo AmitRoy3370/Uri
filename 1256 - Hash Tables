@@ -1,0 +1,84 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
+public class HashTablesUri {
+
+    static int testCases,n,m;
+   
+    static BufferedReader bufferedReader=new BufferedReader( new InputStreamReader(System.in) );
+    
+    static PrintWriter printWriter=new PrintWriter(System.out);
+    
+    public static void main(String[] args) throws IOException {
+        
+        testCases=Integer.parseInt( bufferedReader.readLine() );
+   
+    //    printWriter.println("testCases: "+testCases);
+        
+      //  System.out.println("testCases: "+testCases);
+    
+        for(int i=0;i<testCases;i++){
+            
+            String []l=bufferedReader.readLine().split("\\s");
+            
+            int a[]=new int[l.length];
+            
+            for(int j=0;j<l.length;j++){
+                
+                a[j]=Integer.parseInt( l[j] );
+                
+            }
+            
+            m=a[0];
+            
+      //      printWriter.println("m: "+m);
+ 
+         //   System.out.println("m: "+m);
+      
+            String key[]=new String[m];
+            
+            Arrays.fill(key, "");
+            
+            String elements[]=bufferedReader.readLine().split("\\s");
+            
+            for(String element: elements){
+                
+                int index=Integer.parseInt(element)%m;
+
+try{
+                
+                key[index]+=" -> "+element;
+    
+}catch(Exception e){
+    
+  //  printWriter.println(e);
+    
+}
+                
+            }
+            
+            for(int j=0;j<m;j++){
+                
+                System.out.println( j+key[j]+" -> \\" );
+                
+            }
+     
+            if(i!=testCases-1){
+            
+                System.out.println();
+            
+            }
+            
+        }
+        
+    }
+   
+}
+/*2
+13 9
+44 45 49 70 27 73 92 97 95
+7 8
+35 12 2 17 19 51 88 86*/
