@@ -1,0 +1,71 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+
+    static int testCases,n,total=0;
+    
+    static BufferedReader in=new BufferedReader( new InputStreamReader( System.in ) );
+    
+    static int a[]=new int[51];
+    
+    static int solve(int v,int p){
+        
+        if( p==n ){
+            
+            return 0;
+            
+        }
+        
+        if( a[p]==0 ){
+            
+            total++;
+            
+            a[p]=v;
+            
+           return solve(v+1,p);
+            
+        }
+        
+        for(int i=0;i<=p;i++){
+            
+            int raize=(int)Math.sqrt( a[i]+v );
+            
+            if( Math.pow( raize , 2)==a[i]+v ){
+                
+                a[i]=v;
+                
+                total++;
+                
+          return solve(v+1,p);     
+                
+            }
+            
+        }
+        
+       return solve(v,p+1);
+        
+    }
+    
+    public static void main(String[] args) throws IOException {
+        
+        testCases=Integer.parseInt( in.readLine() );
+        
+        for(int i=0;i<testCases;i++){
+            
+            n=Integer.parseInt( in.readLine() );
+            
+            a=new int[51];
+            
+            total=0;
+            
+            solve(1,0);
+            
+            System.out.println(total);
+            
+        }
+        
+    }
+    
+}
