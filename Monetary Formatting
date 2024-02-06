@@ -1,0 +1,108 @@
+import java.io.IOException;
+import java.util.Scanner;
+ 
+/**
+ * IMPORTANT: 
+ *      O nome da classe deve ser "Main" para que a sua solução execute
+ *      Class name must be "Main" for your solution to execute
+ *      El nombre de la clase debe ser "Main" para que su solución ejecutar
+ */
+public class Main {
+    
+    static Scanner in = new Scanner(System.in);
+    
+    static int testCases, n, m;
+    
+    static char x[], y[];
+    
+    static void solve() {
+        
+    }
+ 
+    public static void main(String[] args) throws IOException {
+ 
+       while(true) {
+           
+           try {
+           
+           x = in.next().toCharArray();
+           
+           } catch(Exception e) {
+               
+               break;
+               
+           }
+          
+           y = in.next().toCharArray();
+           
+           n = x.length;
+           
+           m = y.length;
+           
+           StringBuilder sb = new StringBuilder();
+           
+           sb.append("$");
+           
+           if(n % 3 == 0) {
+               
+               for(int i = 0; !(i >= n); i += 3) {
+                   
+                   sb.append(x[i]).append(x[i + 1]).append(x[i + 2]);
+                   
+                   if(i + 2 != n - 1) {
+                       
+                       sb.append(",");
+                       
+                   }
+               
+               }
+               
+           } else {
+               
+               int i = 0;
+               
+               for(i = 0; !(i >= n % 3); ++i) {
+                   
+                   sb.append((x[i]));
+                   
+               }
+               
+               if(!(i >= n - 1) ) {
+               
+               sb.append(",");
+               
+               }
+               
+               for(; !(i >= n); i += 3) {
+                   
+                   sb.append(x[i]).append(x[i + 1]).append(x[i + 2]);
+                   
+                   if(!(i + 2 >= n - 1) ) {
+                       
+                       sb.append(",");
+                       
+                   }
+                   
+               }
+               
+           }
+           
+           sb.append(".");
+           
+           if(m >= 2) {
+               
+               sb.append(new String(y));
+               
+           } else {
+               
+               sb.append("0").append(new String(y));
+           
+           }
+           
+           System.out.println(sb.toString());
+           
+       }
+ 
+    }
+ 
+}
